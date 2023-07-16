@@ -1,8 +1,8 @@
 import logger from "../logger/logger";
-import { Notifier } from "./base.notifier";
+import { INotifier } from "./base.notifier";
 
 
-class ConsoleNotifier implements Notifier {
+class ConsoleNotifier implements INotifier {
   notifyUser(message: string): void {
     logger.info(`Notification: ${message}`);
   }
