@@ -1,15 +1,13 @@
-import PushTimeBehaviorDetector from '../../../behavior/suspicious/push-time-behavior-detector';
-import { PushPayload } from '../../actions.interface';
-import Events from '../events';
+import { IDetector } from '../../../detectors/detector.interface';
+import SuspiciousEvents from '../events';
 
-class PushSuspiciousEvents extends Events<PushPayload> {
+class PushSuspiciousEvents extends SuspiciousEvents<number> {
 
-    constructor() {
-        super();
-        this.behaviorDetectors.push(
-            new PushTimeBehaviorDetector()
-        )
+
+    addDetectors(detector: IDetector[]) {
+        this.detectors.concat(detector);
     }
+
 
 
 }

@@ -36,8 +36,6 @@ class GitHubWebhooks extends BaseRouter {
             return response.send({});
         });
     }
-
-
 }
 
 export default GitHubWebhooks;

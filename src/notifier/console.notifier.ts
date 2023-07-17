@@ -1,5 +1,5 @@
 import logger from "../logger/logger";
-import { INotifier } from "./base.notifier";
+import { INotifier } from "./notifier.interface";
 
 
 class ConsoleNotifier implements INotifier {

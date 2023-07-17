@@ -1,14 +1,18 @@
-import RepositoryCreationBehaviorDetector from "../../../behavior/suspicious/repository-creation-behavior-detector";
+import WithinXMinutes from "../../../detectors/within-x-minutes";
 import { RepositoryPayload } from "../../actions.interface";
-import Events from "../events";
+import SuspiciousEvents from "../events";
 
-class RepositorySuspiciousEvents extends Events<RepositoryPayload> {
+class RepositorySuspiciousEvents extends SuspiciousEvents<RepositoryPayload> {
 
     constructor() {
         super();
-        this.behaviorDetectors.push(
-            new RepositoryCreationBehaviorDetector()
+        this.detectors.push(
+            new WithinXMinutes()
         )
+    }
+    onEvent(event: RepositoryPayload): void {
+        if (event.action !== 'deleted') return;
+        this.onEvent(event);
     }
 }
 

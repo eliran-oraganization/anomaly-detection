@@ -1,13 +1,14 @@
-import CreateTeamBehaviorDetector from "../../../behavior/suspicious/create-team-behavior-detector";
+import PrefixChecker from "../../../detectors/prefix-checker";
 import { CreateTeamPayload } from "../../actions.interface";
-import Events from "../events";
+import SuspiciousEvents from "../events";
 
-class TeamsSuspiciousEvents extends Events<CreateTeamPayload> {
+class TeamsSuspiciousEvents extends SuspiciousEvents<CreateTeamPayload> {
 
+    
     constructor() {
         super();
-        this.behaviorDetectors.push(
-            new CreateTeamBehaviorDetector()
+        this.detectors.push(
+            new PrefixChecker()
         )
     }
 

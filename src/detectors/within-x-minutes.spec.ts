@@ -1,9 +1,9 @@
-import { RepositoryPayload } from "../../github/actions.interface";
-import RepositoryCreationBehaviorDetector from "./repository-creation-behavior-detector";
+import { RepositoryPayload } from "../github/actions.interface";
+import WithinXMinutes from "./within-x-minutes";
 
 
 describe('Repositories events', () => {
-    const detector = new RepositoryCreationBehaviorDetector();
+    const detector = new WithinXMinutes();
 
     it('Should return true if diff between start-date and end-date is less than allowed minimum diff in minutes', () => {
         const situations: RepositoryPayload[] = [
@@ -11,7 +11,11 @@ describe('Repositories events', () => {
             { action: 'deleted', repository: { created_at: '10/10/2023 12:00', updated_at: '10/10/2023 12:01' } },
             { action: 'deleted', repository: { created_at: '10/10/2023 12:00', updated_at: '10/10/2023 12:05' } }
         ]
-        situations.forEach(situation => expect(detector.detectBehavior(situation)).toBe(true));
+        situations.forEach(situation => expect(detector.detect({
+            startDate: situation.repository.created_at,
+            endDate: situation.repository.updated_at
+        })
+        ).toBe(true));
     });
     it('Should return false if diff between start-date and end-date is bigger than allowed minimum diff in minutes', () => {
         const situations: RepositoryPayload[] = [
@@ -19,6 +23,9 @@ describe('Repositories events', () => {
             { action: 'deleted', repository: { created_at: '10/10/2023 12:00', updated_at: '10/10/2023 12:11' } },
             { action: 'deleted', repository: { created_at: '10/10/2023 12:00', updated_at: '10/10/2023 13:05' } }
         ]
-        situations.forEach(situation => expect(detector.detectBehavior(situation)).toBe(false));
+        situations.forEach(situation => expect(detector.detect({
+            startDate: situation.repository.created_at,
+            endDate: situation.repository.updated_at
+        })).toBe(false));
     })
 })
