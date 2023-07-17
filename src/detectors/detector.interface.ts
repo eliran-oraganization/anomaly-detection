@@ -1,4 +1,4 @@
-export interface IDetector{
-    detect<T>(payload: T): boolean;
+export interface IDetector<T>{
+    detect(payload: T): boolean;
 }
 
