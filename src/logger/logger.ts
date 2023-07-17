@@ -1,9 +1,7 @@
 import winston, { Logger as WinstonLogger, transports } from 'winston';
 
 class Logger extends WinstonLogger{
-    private static instance: Logger;
-
-    private constructor() {
+    constructor() {
         super();
 
         const logger = winston.createLogger({
@@ -20,21 +18,11 @@ class Logger extends WinstonLogger{
                 new transports.Console()
             ]
         });
-
-        Logger.instance = logger;
-    }
-
-    public static getInstance(): Logger {
-        if (!Logger.instance) {
-            new Logger();
-        }
-
-        return Logger.instance;
     }
 }
 
 
-const logger = Logger.getInstance();
+const logger = new Logger();
 export default logger;
 
 

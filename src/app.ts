@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import express, { Application } from 'express';
 import logger from './logger/logger';
-import EventRoutes from './routes/routes';
 import { HttpCode } from './exceptions/app-error';
+import GitHubWebhooks from './github/github.routes';
 
 
 class App {
@@ -18,8 +18,8 @@ class App {
     }
 
     configureRoutes() {
-        const eventsRoute = new EventRoutes();
-        this.app.use('/events/', eventsRoute.router);
+        const githubWebhooksRouter = new GitHubWebhooks();
+        this.app.use('/events/github/', githubWebhooksRouter.router);
         this.app.use((error: Error, _: Request, response: Response, next: NextFunction) => {
             if (process.env.NODE_ENV !== 'production') {
                 logger.error(error.message, error.stack)

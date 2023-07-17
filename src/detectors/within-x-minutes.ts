@@ -2,6 +2,8 @@ import { RepositoryPayload } from "../github/actions.interface";
 import { IDetector } from "./detector.interface";
 
 
+
+
 class WithinXMinutes implements IDetector<RepositoryPayload> {
 
   detect(payload: RepositoryPayload): boolean {

@@ -4,9 +4,7 @@ import ConsoleNotifier from "../../notifier/console.notifier";
 import { INotification, INotifier } from "../../notifier/notifier.interface";
 
 
-
-
-abstract class SuspiciousEvents<T> implements INotification {
+class SuspiciousEvents<T> implements INotification {
 
     protected detectors: IDetector<T>[] = [];
 
@@ -17,6 +15,10 @@ abstract class SuspiciousEvents<T> implements INotification {
                 this.notifyUser(JSON.stringify(event), new ConsoleNotifier());
             }
         });
+    }
+
+    removeDetectors(detector: IDetector<T>[]) { 
+        this.detectors = this.detectors.filter(d => !detector.includes(d));
     }
 
     notifyUser(message: string, notifier: INotifier): void {
