@@ -1,14 +1,7 @@
-import { IDetector } from '../../../detectors/detector.interface';
+import { PushPayload } from '../../actions.interface';
 import SuspiciousEvents from '../events';
 
-class PushSuspiciousEvents extends SuspiciousEvents<number> {
-
-
-    addDetectors(detector: IDetector[]) {
-        this.detectors.concat(detector);
-    }
-
-
+class PushSuspiciousEvents extends SuspiciousEvents<PushPayload> {
 
 }
 

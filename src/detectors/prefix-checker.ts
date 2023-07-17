@@ -1,11 +1,12 @@
+import { CreateTeamPayload } from "../github/actions.interface";
 import { IDetector } from "./detector.interface";
 
 
 const PREFIX = 'hacker';
-class PrefixChecker implements IDetector {
+class PrefixChecker implements IDetector<CreateTeamPayload> {
 
-    detect(sentence: string): boolean {
-        return sentence.toLowerCase().includes(PREFIX);
+    detect(payload: CreateTeamPayload): boolean {
+        return payload.team.name.toLowerCase().includes(PREFIX);
     }
 }
 

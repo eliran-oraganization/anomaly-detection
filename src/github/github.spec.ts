@@ -12,7 +12,7 @@ describe('GitHub Events', () => {
         it('When create a team with name that not include the hacker prefix should not detect suspicious behavior', async () => {
 
             const teamBody: CreateTeamPayload[] = [
-                { action: 'created', team: { name: 'abchackefg' } },
+                { action: 'created', team: { name: 'abchackefgr' } },
                 { action: 'created', team: { name: 'HACK' } },
                 { action: 'created', team: { name: 'team hack' } },
                 { action: 'created', team: { name: 'new hack team' } }

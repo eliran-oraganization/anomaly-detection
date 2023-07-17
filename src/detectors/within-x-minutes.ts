@@ -1,15 +1,13 @@
+import { RepositoryPayload } from "../github/actions.interface";
 import { IDetector } from "./detector.interface";
 
-export interface WithinXMinutesPayload {
-  startDate: string;
-  endDate: string;
-}
 
-class WithinXMinutes implements IDetector {
+class WithinXMinutes implements IDetector<RepositoryPayload> {
 
-  detect<WithinXMinutesPayload>(payload: WithinXMinutesPayload): boolean {
-    const creationTime = new Date(payload.startDate);
-    const deletionTime = new Date(payload.endDate);
+  detect(payload: RepositoryPayload): boolean {
+    if (payload.action !== 'deleted') return false;
+    const creationTime = new Date(payload.repository.created_at);
+    const deletionTime = new Date(payload.repository.updated_at);
     const timeDifference = deletionTime.getTime() - creationTime.getTime();
     return timeDifference < 10 * 60 * 1000;
   }
