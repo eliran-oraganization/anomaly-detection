@@ -3,14 +3,14 @@ import { PushPayload, RepositoryPayload, CreateTeamPayload } from './actions.int
 import PrefixChecker from '../detectors/prefix-checker';
 import WithinXMinutes from '../detectors/within-x-minutes';
 import IsBetweenHours from '../detectors/is-push-between-hours';
-import SuspiciousEvents from './events/suspicious-events';
+import Suspicious from '../behaviors/suspicious';
 
 
 class GitHubWebhooks {
     public readonly router = Router();
-    private readonly teamsSuspiciousEvents = new SuspiciousEvents<CreateTeamPayload>()
-    private readonly repositorySuspiciousEvents = new SuspiciousEvents<RepositoryPayload>()
-    private readonly pushSuspiciousEvents = new SuspiciousEvents<PushPayload>()
+    private readonly teamsSuspiciousEvents = new Suspicious<CreateTeamPayload>()
+    private readonly repositorySuspiciousEvents = new Suspicious<RepositoryPayload>()
+    private readonly pushSuspiciousEvents = new Suspicious<PushPayload>()
 
     constructor() {
         this.initializeRoutes();
