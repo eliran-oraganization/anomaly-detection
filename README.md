@@ -2,7 +2,7 @@
 
 ## Description
 
-to implement a simple command line application that will detect and notify suspicious behavior in an integrated GitHub organization.
+to implement a simple command line application that will detect and notify suspicious behavior in an integrated GitHub organization. fds
 
 Suspicious behaviors:
 1. pushing code between 14:00-16:00
