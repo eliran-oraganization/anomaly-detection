@@ -4,7 +4,7 @@
 
 to implement a simple command line application that will detect and notify suspicious behavior in an integrated GitHub organization.
 
-Suspicious behaviors:
+Suspicious behaviors:ytre
 1. pushing code between 14:00-16:00
 2. create a team with the prefix “hacker”
 3. creating a repository and deleting it in less than 10 minutes
